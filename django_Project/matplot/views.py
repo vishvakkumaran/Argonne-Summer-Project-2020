@@ -3,6 +3,7 @@ from django.shortcuts import render
 # Create your views here
 
 import matplotlib.pyplot as Iperf
+import statistics
 import io
 import urllib, base64
 
@@ -45,14 +46,24 @@ def home(request):
   Iperf.bar(x,avg1,color=(1.0, 0.0, 0.0, 1.0))
 
   Iperf.bar(y,avg2,color=(1.0, 0.0, 0.0, 1.0))
-
+  Iperf.bar(y,avg2b,color=(1.0, 0.0, 0.0, 1.0))
+  Iperf.bar(y,bar1, bottom=avg2b,color=(0.0, 0.0, 1.0, 1.0))
+  
   Iperf.bar(z,avg3,color=(1.0, 0.0, 0.0, 1.0))
-
+  Iperf.bar(z,avg3c,color=(1.0, 0.0, 0.0, 1.0))
+  Iperf.bar(z,bar2, bottom=avg3c,color=(0.0, 0.0, 1.0, 1.0))
+  Iperf.bar(z,bar2, bottom=total,color=(0.0, 1.0, 0.0, 1.0))
+  
   Iperf.bar(w,avg4,color=(1.0, 0.0, 0.0, 1.0))
-
+  Iperf.bar(w,avg4d,color=(1.0, 0.0, 0.0, 1.0))
+  Iperf.bar(w,bar3, bottom=avg4d,color=(0.0, 0.0, 1.0, 1.0))
+  Iperf.bar(w,bar3, bottom=total1,color=(0.0, 1.0, 0.0, 1.0))
+  Iperf.bar(w,bar3, bottom=total2,color=(1.0, 0.0, 1.0, 1.0))
+  
   Iperf.title("Average Throughput for Concurrent Connections")
   Iperf.xlabel("Number of Concurrent Connections")
   Iperf.ylabel("Average Throughput(Gbits/sec) per Concurrent Connection")
+  
   fig = Iperf.gcf()
   #convert graph into dtring buffer and then we convert 64 bit code into image
   buf = io.BytesIO()
